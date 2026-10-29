@@ -1,71 +1,94 @@
-# Mental model and workflows
+# Mental model and development procedures
 
-## A stack of languages
+## Semantic layers
 
-Each level has **primitives, means of combination, and means of abstraction**.
-An operation built at one level becomes a primitive for a higher level.
-For example: byte operations → framed records → recording intervals → publishable
-recording. These are illustrative vocabularies, not prescribed modules.
+Each layer has **primitives, means of combination, and means of abstraction**.
+An operation from one layer becomes a primitive for a higher layer.
+For example, byte operations support framed records. Framed records support
+recording intervals. Recording intervals support a recording that is ready
+for publication. These are examples of languages, not required modules.
 
-Judge a layer by what callers can stop knowing. Renaming low-level mechanics
-without hiding them does not create an abstraction barrier. Multiple semantic
-levels may fit in one module; one level may span modules.
+An abstraction barrier hides details that callers do not need.
+A different name for the same details does not create a barrier.
+One module can contain several semantic layers. One layer can use several modules.
 
-Normand's four patterns, from *Grokking Simplicity* chapters 8–9:
+Normand describes four patterns in *Grokking Simplicity*, chapters 8 and 9.
 
 | Pattern | Design question |
 | --- | --- |
-| Straightforward implementation | Can this operation be read in a coherent vocabulary, without switching repeatedly between business intent and representation details? |
-| Abstraction barrier | Can callers use the operation without knowing the representation beneath it? |
-| Minimal interface | Is the barrier's interface small but sufficient, with other operations composed outside it? |
-| Comfortable layers | Do these boundaries make actual work easier, or add indirection without reducing reasoning? |
+| Straightforward implementation | Does the operation use a consistent level of detail? |
+| Abstraction barrier | Can callers use the operation without knowing its data representation? |
+| Minimal interface | Can callers express their needs through a small set of operations? |
+| Comfortable layers | Do the layers make the work easier, without unnecessary steps? |
 
-**Actions / calculations / data** are an orthogonal lens. Actions depend on
-when or how often they execute; calculations map explicit values to results
-without effects; data records facts or plans. Passing a database client or
-clock callable as an argument does not make a calculation pure. Pass a time
-value to pure rules; inject clocks into effectful coordination where useful.
+Operations outside a minimal interface can combine its basic operations.
+An additional wrapper is useful only if it hides details or expresses a useful concept.
 
-General, stable operations often sit below specific, frequently changing
-policies. Rehearse a policy change and a representation change: which callers
-and tests must understand each? This tests locality, without demanding exactly
-one changed file or a universally acyclic call graph.
+## Effects and information
 
-## Greenfield
+**Actions, calculations, and data** are separate from semantic layers.
+Actions depend on when or how often they run.
+Calculations produce results from explicit inputs without side effects.
+They do not change their inputs.
+Data records facts or plans.
 
-Start with scenarios, invariants, and the vocabulary callers need. Sketch a
-meaningful operation and implement its lower-level primitives as needed.
-Extract calculations where decisions become clearer; compose effects around
-them while keeping transactions and ordering explicit. Deliver a working
-vertical slice with tests at its meaningful boundaries, then grow the
-vocabulary from actual use. Avoid speculative frameworks and predetermined
-layer counts. Test strategy: [testing.md](testing.md).
+A database client argument does not make a function pure.
+A clock function argument does not make a function pure.
+Give time values to pure calculations. Use a controlled clock in code that
+performs effects when tests need control of time.
 
-## Brownfield, including poorly understood code
+General operations that change infrequently usually support specific rules
+that change more often. Consider a business-rule change and a data-representation
+change. Identify the callers and tests that each change affects.
+This comparison shows whether changes stay within suitable boundaries.
+It does not require a fixed number of files or layers.
 
-Map actual callers, effects, and failure/recovery contracts before choosing
-boundaries. Characterize uncertain behavior first. Select a vertical slice,
-introduce a useful semantic operation, move behavior and tests together, and
-update real callers. Compare the result using the two change rehearsals above.
-Continue across the agreed scope after the pilot; a pilot is a feedback step,
-not an automatic permanent limit.
+## Greenfield: new software
+
+1. Identify the scenarios, invariants, and operations that callers need.
+2. Implement one useful operation with its lower-level primitives.
+3. Separate calculations when this makes decisions easier to understand.
+4. Identify effects, transaction boundaries, and required operation order.
+5. Do tests of a complete path through the new behavior.
+6. Add operations and layers as actual use requires them.
+
+Do not select a framework or layer count before the problem requires it.
+See [testing.md](testing.md) for the test strategy.
+
+## Brownfield: existing or poorly understood code
+
+1. Find actual callers, effects, and failure-recovery behavior.
+2. Do tests of uncertain behavior before a change.
+3. Select one complete path through the existing behavior.
+4. Introduce an operation with a useful semantic boundary.
+5. Move behavior and tests together.
+6. Update callers to use the new operation.
+7. Evaluate the design with the two change examples above.
+8. Continue through the agreed scope after evaluation of the pilot.
+
+The pilot provides feedback. It does not automatically limit the agreed scope.
 
 ## Traps and edge cases
 
-- **False barriers:** pass-through wrappers, renamed mechanics, or a helper
-  that accepts an already-made decision. A meaningful boolean predicate can
-  still be a good abstraction.
-- **Eager extraction:** moving all reads up front changes short-circuiting,
-  error order, memory use, and I/O cost. Preserve lazy reads and stream behavior
-  where they matter; do not add parsing or hash passes to fit a diagram.
-- **Changed error boundaries:** preserve which read errors mean unknown,
-  retry, or fatal. Moving a read across a catch changes behavior even if the
-  success-path result is identical.
-- **Stale plans:** gathering facts and later applying a decision can race.
-  Retain required revalidation, atomicity, durability, and cancellation.
-- **Over-purification:** orchestration still owns partial effects, retries,
-  backpressure, and recovery where applicable. A thin shell is not automatically
-  trivial or safe. Hide incidental mechanics, not business-critical sequencing.
-- **Representation leaks:** keep opaque identities opaque; preserve conversion
-  and validation semantics. DTOs help only when their fields express a useful
-  contract rather than mirror mutable state without ownership.
+**False barriers.** A wrapper that only forwards calls can leave all details
+with the caller. A helper that receives an existing decision might hide no
+useful behavior. A boolean predicate can still express a useful concept.
+
+**Reads that occur too early.** Reading all inputs first can change error order,
+memory use, and I/O cost. Keep conditional reads and stream behavior where
+required. Do not add parsing or hash passes only to match a diagram.
+
+**Changed error handling.** Some read errors require an unknown result.
+Others require a retry or a fatal error. Moving a read across an exception
+handler can change this behavior. Keep the required error handling and read order.
+
+**Stale data.** Data can change between a read and the use of a decision.
+Keep required checks, atomic operations, durability, and cancellation behavior.
+
+**Effects that remain complex.** Code that performs effects can own retries,
+backpressure, partial failures, and recovery. Few lines do not make this code
+safe. Hide internal details without removing required operation order.
+
+**Data representation.** Keep opaque identifiers opaque. Keep conversion and
+validation behavior. Use records to express contracts. Avoid copies of mutable
+state without a clear owner.

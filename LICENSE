@@ -20,6 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Third-party exception: the reproduced SICP fragment and its presentation in
-references/sicp-verbatim.md are licensed under CC BY-SA 4.0, not this MIT
-license. Attribution, exact source, and license links are in that file.
+Third-party exception:
+The SICP fragment and its presentation in references/sicp-verbatim.md use CC BY-SA 4.0.
+The MIT license does not apply to this fragment or its presentation.
+That file gives the attribution, exact source, and license links.

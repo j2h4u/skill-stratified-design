@@ -11,18 +11,19 @@ and the JavaScript alternatives by Martin Henz and Tobias Wrigstad.
 - [Publisher-maintained attribution and licensing](https://github.com/source-academy/sicp/blob/6ffbe026a461092cf358a8f8658dd0313c634daa/README.md#license).
 - [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); [source license](https://raw.githubusercontent.com/source-academy/sicp/6ffbe026a461092cf358a8f8658dd0313c634daa/LICENSE).
 
-This file reproduces the complete five prose blocks under that subheading,
-ending before the exercise; it is an excerpt, not the whole chapter or book.
-The XML fragment below is copied byte-for-byte from the linked source. Original
-markup, index entries, and language alternatives remain intact. Only this
-attribution and the Markdown fence were added. This reproduced fragment and its
-presentation here are distributed under CC BY-SA 4.0. Other skill references
-are original practical guidance rather than verbatim book text.
+This file contains all five prose blocks under the source subheading.
+The excerpt ends before the exercise. It is not the complete chapter or book.
+The XML fragment matches the linked source byte for byte.
+It keeps the original markup, index entries, and language alternatives.
+
+We added the attribution and the Markdown fence.
+The fragment and its presentation here use CC BY-SA 4.0.
+The other references contain our own guidance, not verbatim book text.
 
 Fragment SHA-256: `0375833ffccdd9d955fef28f9e75127bc7784968912626af898c4f21c4122ca5`.
 
-Read this file when checking the exact source wording. For operational guidance
-use [Design](design.md) and [Testing](testing.md).
+Read this file for comparison with the exact source text.
+For task guidance, use [Design](design.md) and [Testing](testing.md).
 
 ```xml
   <SUBHEADING>

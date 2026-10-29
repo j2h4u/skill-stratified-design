@@ -1,53 +1,72 @@
-# Testing strategy
+# Test strategy
 
-Test contracts at stable semantic boundaries. This is practical synthesis,
-not an official Normand test pyramid. Layers need neither matching test folders
-nor fixed test ratios.
+Do tests of required behavior through stable semantic interfaces. This guidance is
+our application of the design principles. It is not an official Normand test
+pyramid. Layers do not require matching test folders or fixed test ratios.
 
-| Boundary | Useful evidence |
+| Boundary | Test purpose |
 | --- | --- |
-| Calculation | Table of values and expected decisions; properties when an invariant warrants them. No I/O or mocked domain logic. |
-| Adapter | Real isolated storage/protocol semantics: transactions, framing, serialization, replacement, and error propagation. |
-| Composition | Meaningful effects and outcomes through controlled dependencies; order where it protects the contract. |
-| Integration / end to end | Representative production components joined through a real public boundary, catching assumptions that isolated tests share. |
+| Calculation | Do tests of input values and expected decisions without I/O or mocked domain logic. |
+| Adapter | Do tests of actual storage or protocol behavior with isolated resources. |
+| Composition | Do tests of effects, outcomes, and required operation order with controlled dependencies. |
+| Integration or end to end | Connect real components through a public interface to find incorrect assumptions in isolated tests. |
 
-**Stable-interface tests, independent oracles, boundary fakes, fault injection,
-property-based testing** are the anchors; choose them by the failure they expose.
-Do not equate a unit with a function or test every new private helper.
+Useful methods include **stable-interface tests, independent test oracles,
+boundary fakes, fault injection, and property-based testing**.
+Select a method for the failure it can detect.
+A test unit is not necessarily one function.
+Do not add separate tests for every private helper.
 
-## Greenfield and existing tests
+## New software
 
-For greenfield, derive contract cases with the first working vertical slice;
-use pure tests for decisions and real boundary tests for effects.
-For brownfield, retain characterization and regression cases while moving
-behavior. Add direct calculation tests, but keep effect tests at the boundary
-that still owns persistence, recovery, and cancellation. A private hook may be
-a useful fault-injection seam: retarget it rather than losing the failure case
-or making it public merely for tests.
+Derive test cases from the required behavior of the first complete path.
+Do tests of decisions with pure calculations. Do tests of effects at actual system boundaries.
+Use isolated resources for tests of storage and protocols.
 
-## Make edge cases explicit
+## Changes to existing tests
 
-For applicable categories—empty/missing, exact boundary, contradictory state,
-scale, ordering/concurrency, partial failure—distinguish **tested**, **excluded
-by a type or constraint**, **not applicable (why)**, and **unresolved**.
-Use this during design/review, not as a mandatory new report artifact. A claimed
-constraint must actually hold at the relevant trust boundary.
+Keep characterization and regression cases when behavior moves.
+Add direct tests for calculations. Keep effect tests where the code still
+controls persistence, recovery, and cancellation.
 
-Ask whether a plausible wrong implementation would fail the test. Expected
-results need an independent basis; reproducing the implementation is not an
-oracle. Pure tests cannot establish storage durability, and two compatible
-fakes cannot establish real integration.
+A private hook can provide useful fault injection. Change the hook when its
+boundary moves. Keep the failure case that the test detects.
+Do not make a hook public only for tests.
+Do not keep a poor interface only because tests use it.
 
-## Traps
+## Edge cases
 
-- Treat ordering as observable when it enforces persistence-before-acknowledgement,
-  transaction boundaries, or another promise; otherwise avoid private call traces.
-- Exercise required partial-write, ambiguous-commit, restart, and stale-snapshot
-  cases through the component that owns them. A small shell can carry large risk.
-- For async coordination prefer events and controlled clocks; retain a generous
-  watchdog for hangs. Distinguish a test watchdog from a product timeout.
-- Do not delete regression coverage because a helper moved. Do not preserve a
-  bad interface solely because tests name it. Move tests with behavior.
+Consider missing inputs, exact boundaries, contradictory states, scale,
+operation order, concurrency, and partial failure.
+Give each applicable case one of these results:
 
-Use the project's existing iteration and release gates; this skill adds no
-mandatory tools, coverage floor, or separate QA pipeline.
+- **Tested:** A test confirms the required behavior.
+- **Prevented:** A type or constraint prevents the case at the relevant boundary.
+- **Not applicable:** The case does not apply, for a stated reason.
+- **Unresolved:** The case remains a known gap.
+
+Use these results during design and review. They do not require a separate
+report file. Make sure that each stated constraint applies to the actual input.
+
+## Test quality and common problems
+
+Ask whether a likely implementation error would cause the test to fail.
+Use an independent basis for expected results. A copy of the implementation
+is not an independent test oracle.
+
+Pure tests cannot establish storage durability. Two compatible fakes cannot
+establish that real components work together.
+
+Do a check of operation order when it protects a contract. Examples include durable
+storage before acknowledgement and transaction boundaries.
+Do not add checks of private call order without a required behavior.
+
+Do tests of partial writes, ambiguous commits, restarts, and stale data where the component owns these conditions.
+A small component can have important failure behavior.
+
+Use events and controlled clocks for asynchronous tests where possible.
+Keep a test timeout that stops a hang. Allow enough time for slow test
+resources. A test timeout and a product timeout have different purposes.
+
+Keep existing project checks for development and release.
+This skill requires no additional tools, coverage minimum, or QA pipeline.

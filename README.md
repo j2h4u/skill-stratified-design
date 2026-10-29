@@ -1,16 +1,17 @@
 # Stratified design agent skill
 
-A concise guide to software as a stack of semantic languages: a mental model,
-greenfield and brownfield workflows, test strategy, and refactoring traps.
-Based on SICP and Eric Normand's practical treatment in *Grokking Simplicity*.
+This skill describes software as a sequence of semantic layers. It gives a
+mental model, development procedures, test guidance, and common problems.
+Its sources include SICP and Eric Normand's *Grokking Simplicity*.
 
-Start with [SKILL.md](SKILL.md). It routes to focused references; the
-[verbatim SICP excerpt](references/sicp-verbatim.md) is for source verification,
-not required reading on every task. The skill has no runtime dependencies.
+Start with [SKILL.md](SKILL.md). It links to the references for each task.
+The [verbatim SICP excerpt](references/sicp-verbatim.md) permits comparison with
+the source text. Normal tasks do not require this comparison. The skill has
+no runtime dependencies.
 
-## Install locally
+## Local installation
 
-For agents that discover skills in `~/.agents/skills`:
+These commands install the skill for applications that read `~/.agents/skills`.
 
 ```bash
 git clone https://github.com/j2h4u/skill-stratified-design.git ~/repos/j2h4u/skill-stratified-design
@@ -18,17 +19,23 @@ mkdir -p ~/.agents/skills
 ln -s ~/repos/j2h4u/skill-stratified-design ~/.agents/skills/stratified-design
 ```
 
-The destination must not already exist. If the skill is already installed,
-reconcile its contents before replacing it. Edit and update the repository;
-the symlink makes the same files available to local agents without a copy step.
-Agent discovery and reload behavior depend on the host application.
+Before installation, make sure that the clone path and the link path do not exist.
+If a previous installation exists, compare its contents before replacement.
 
-## Sources and licensing
+Edit and update the repository. The symbolic link gives local agents access
+to the same files. The host application controls skill discovery and reload.
 
-[Sources and optional tools](references/sources-and-tools.md) distinguishes
-primary sources, our synthesis, and adjacent skill research. Optional analyzers
-are references, not installed dependencies or required gates.
+## Sources and licenses
 
-Original guidance is [MIT licensed](LICENSE). The attributed SICP excerpt
-retains its separate **CC BY-SA 4.0** license; see its source and licensing
-notice. Linked external works retain their respective licenses.
+[Sources and optional tools](references/sources-and-tools.md) identifies the
+source material and related research. Optional tools are not dependencies
+or required checks.
+
+The original guidance uses the [MIT license](LICENSE). The SICP excerpt keeps
+its separate **CC BY-SA 4.0** license. Its reference file gives the attribution
+and license links. External works keep their own licenses.
+
+## Document changes
+
+Use ASD-STE100 Simplified Technical English for all original guidance.
+Keep verbatim source text and standard license text unchanged.

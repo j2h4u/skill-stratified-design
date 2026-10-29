@@ -1,36 +1,38 @@
 ---
 name: stratified-design
-description: Use when a project or task adopts stratified design for greenfield work or brownfield refactoring into coherent semantic layers with small interfaces.
+description: Use stratified design for new software or existing code. Organize operations into semantic layers with small interfaces.
 ---
 
 # Stratified design
 
-Think of a system as a stack of small languages. At each level, meaningful
-operations combine primitives from lower levels; those operations become the
-vocabulary of the next level. A reader should understand an operation without
-mentally executing its lower-level mechanics. The payoff is local reasoning
-and local change, not a particular directory tree or fewer lines.
+A system has a sequence of semantic layers. Each layer has a language for its
+level of detail. Operations combine primitives from lower layers. These
+operations become primitives for the next layer. This structure helps readers
+understand and change one layer without following all lower-level details.
 
-Apply it first within functions and modules: keep operations at clear semantic
-levels. It complements system-level choices such as hexagonal or layered
-architecture and domain-driven design; adopting it does not require replacing
-them. The same principle can also guide larger structures.
+Apply this approach first within functions and modules. It also applies to
+larger structures. It supports hexagonal architecture, layered architecture,
+and domain-driven design. It does not require their replacement.
 
-Normand's four anchors: **straightforward implementation, abstraction barrier,
-minimal interface, comfortable layers**. Stratification concerns semantic
-levels; **actions / calculations / data** concern effects. These are separate
-axes: actions can be stratified, and purity alone does not create useful layers.
+Normand names four patterns: **straightforward implementation, abstraction
+barrier, minimal interface, comfortable layers**. Semantic layers describe
+levels of meaning. **Actions, calculations, and data** describe effects and
+information. These distinctions are separate. Actions can have semantic layers.
+Pure functions alone do not create useful layers.
 
-- For the mental model, greenfield/brownfield workflows, and design traps,
-  read [design.md](references/design.md).
-- When designing or migrating tests, read [testing.md](references/testing.md).
-- For exact classic wording, consult [the attributed verbatim SICP excerpt](references/sicp-verbatim.md).
-- For author material and optional tooling, consult [sources-and-tools.md](references/sources-and-tools.md).
+- For the mental model and development procedures, read [design.md](references/design.md).
+- For test strategy and test changes, read [testing.md](references/testing.md).
+- For the exact source text, read [the SICP excerpt](references/sicp-verbatim.md).
+- For author material and optional tools, read [sources-and-tools.md](references/sources-and-tools.md).
 
-Use the local guide without repeating introductory web research. Discover
-layers from the problem; do not impose a fixed stack or turn every helper into
-a layer. Preserve the agreed scope and behavioral guarantees. Extra records
-and lines are acceptable when they reduce what a reader must keep in mind.
+Use these local references for normal work. Do not repeat basic web research.
+Select layers from the problem. Do not prescribe a folder structure or make
+every helper a layer. Keep the agreed scope and required behavior. More lines
+and records are acceptable when they make the code easier to understand.
 
-Maintain this skill and its references in simple technical English, with no
-Cyrillic text. Keep attributed verbatim source excerpts unchanged.
+## Writing rules
+
+Use **ASD-STE100 Simplified Technical English** for all original text in this
+skill, including its references. Use short sentences, direct instructions,
+and consistent technical terms. Keep Cyrillic characters out of file names
+and contents. Keep verbatim source text and standard license text unchanged.
