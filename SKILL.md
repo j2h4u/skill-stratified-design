@@ -24,6 +24,7 @@ Pure functions alone do not create useful layers.
 - For test strategy and test changes, read [testing.md](references/testing.md).
 - For the exact source text, read [the SICP excerpt](references/sicp-verbatim.md).
 - For author material and optional tools, read [sources-and-tools.md](references/sources-and-tools.md).
+- For installation and licenses, read [README.md](README.md).
 
 Use these local references for normal work. Do not repeat basic web research.
 Select layers from the problem. Do not prescribe a folder structure or make
