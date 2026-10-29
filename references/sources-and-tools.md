@@ -2,6 +2,9 @@
 
 ## Primary sources
 
+The [local author notes](author-notes.md) summarize the explanations below.
+They give examples and source locations without external research.
+
 - SICP, section 2.2.4: [Example: A Picture Language](https://sicp.sourceacademy.org/chapters/2.2.4.html).
   Its subsection, “Levels of language for robust design”, describes the sequence of languages.
   The [local excerpt](sicp-verbatim.md) includes the exact text, attribution, and license.
@@ -12,6 +15,8 @@
   These slides connect semantic layers, change frequency, purity, and onion architecture.
 - Normand on [calculations](https://ericnormand.me/podcast/what-is-a-calculation)
   and [stratified design](https://ericnormand.me/podcast/more-about-stratified-design).
+- Normand's [interview about Grokking Simplicity and stratified design](https://ericnormand.me/speaking/grokking-simplicity-stratified-design-functional-programming-does-not-compute-podcast)
+  explains domain levels and comfortable layers.
 - Normand on [extraction and testability](https://livebook.manning.com/book/grokking-simplicity/chapter-4/page_85).
 
 SICP gives a classic description. Normand gives practical patterns.

@@ -46,9 +46,9 @@ It does not require a fixed number of files or layers.
 ## Greenfield: new software
 
 1. Identify the scenarios, invariants, and operations that callers need.
-2. Implement one useful operation with its lower-level primitives.
-3. Separate calculations when this makes decisions easier to understand.
-4. Identify effects, transaction boundaries, and required operation order.
+2. Identify effects, transaction boundaries, and required operation order.
+3. Implement one useful operation with its lower-level primitives.
+4. Separate calculations when this makes decisions easier to understand.
 5. Do tests of a complete path through the new behavior.
 6. Add operations and layers as actual use requires them.
 
@@ -60,9 +60,10 @@ See [testing.md](testing.md) for the test strategy.
 1. Find actual callers, effects, and failure-recovery behavior.
 2. Do tests of uncertain behavior before a change.
 3. Select one complete path through the existing behavior.
-4. Introduce an operation with a useful semantic boundary.
+4. Use an existing operation with a useful semantic boundary.
+   Add one only when needed.
 5. Move behavior and tests together.
-6. Update callers to use the new operation.
+6. Update callers where the interface changes.
 7. Evaluate the design with the two change examples above.
 8. Continue through the agreed scope after evaluation of the pilot.
 
@@ -88,7 +89,9 @@ Keep required checks, atomic operations, durability, and cancellation behavior.
 **Effects that remain complex.** Code that performs effects can own retries,
 backpressure, partial failures, and recovery. Few lines do not make this code
 safe. Hide internal details without removing required operation order.
+When you move effects into a helper, keep required resource lifetimes and
+cleanup order.
 
 **Data representation.** Keep opaque identifiers opaque. Keep conversion and
-validation behavior. Use records to express contracts. Avoid copies of mutable
-state without a clear owner.
+validation behavior. Use a record when related values need an explicit contract.
+Avoid copies of mutable state without a clear owner.

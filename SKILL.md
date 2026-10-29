@@ -22,6 +22,7 @@ Pure functions alone do not create useful layers.
 
 - For the mental model and development procedures, read [design.md](references/design.md).
 - For test strategy and test changes, read [testing.md](references/testing.md).
+- For local author explanations and examples, read [author-notes.md](references/author-notes.md).
 - For the exact source text, read [the SICP excerpt](references/sicp-verbatim.md).
 - For author material and optional tools, read [sources-and-tools.md](references/sources-and-tools.md).
 - For installation and licenses, read [README.md](README.md).

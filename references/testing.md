@@ -26,8 +26,9 @@ Use isolated resources for tests of storage and protocols.
 ## Changes to existing tests
 
 Keep characterization and regression cases when behavior moves.
-Add direct tests for calculations. Keep effect tests where the code still
-controls persistence, recovery, and cancellation.
+Add direct calculation tests when they make important decisions easier to test.
+Existing stable-interface tests can be sufficient. Keep effect tests where the
+code still controls persistence, recovery, and cancellation.
 
 A private hook can provide useful fault injection. Change the hook when its
 boundary moves. Keep the failure case that the test detects.
