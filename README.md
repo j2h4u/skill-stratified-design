@@ -4,7 +4,9 @@ This skill describes software as a sequence of semantic layers. It gives a
 mental model, development procedures, test guidance, and common problems.
 Its sources include SICP and Eric Normand's *Grokking Simplicity*.
 
-Start with [SKILL.md](SKILL.md). It links to the references for each task.
+Start with the outline in [SKILL.md](SKILL.md). If you need more information,
+read [the full skill](FULL-SKILL.md). It links to detailed task guidance and
+author material in the references.
 The [verbatim SICP excerpt](references/sicp-verbatim.md) permits comparison with
 the source text. Normal tasks do not require this comparison. The skill has
 no runtime dependencies.
