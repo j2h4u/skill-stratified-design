@@ -1,9 +1,9 @@
 ---
 name: stratified-design
-description: Use stratified design for new software or existing code. Organize operations into semantic layers with small interfaces.
+description: Use Stratified Design (SICP; Eric Normand, Grokking Simplicity) to design new code or refactor existing code into semantic layers.
 ---
 
-# Stratified design
+# Stratified Design
 
 Use this outline first. If a concept is unclear or you need more information,
 read [the full skill](FULL-SKILL.md). Follow its references only as needed.

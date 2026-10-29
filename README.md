@@ -1,4 +1,4 @@
-# Stratified design agent skill
+# Stratified Design agent skill
 
 This skill describes software as a sequence of semantic layers. It gives a
 mental model, development procedures, test guidance, and common problems.
