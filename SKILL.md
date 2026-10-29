@@ -11,6 +11,11 @@ vocabulary of the next level. A reader should understand an operation without
 mentally executing its lower-level mechanics. The payoff is local reasoning
 and local change, not a particular directory tree or fewer lines.
 
+Apply it first within functions and modules: keep operations at clear semantic
+levels. It complements system-level choices such as hexagonal or layered
+architecture and domain-driven design; adopting it does not require replacing
+them. The same principle can also guide larger structures.
+
 Normand's four anchors: **straightforward implementation, abstraction barrier,
 minimal interface, comfortable layers**. Stratification concerns semantic
 levels; **actions / calculations / data** concern effects. These are separate
@@ -26,3 +31,6 @@ Use the local guide without repeating introductory web research. Discover
 layers from the problem; do not impose a fixed stack or turn every helper into
 a layer. Preserve the agreed scope and behavioral guarantees. Extra records
 and lines are acceptable when they reduce what a reader must keep in mind.
+
+Maintain this skill and its references in simple technical English, with no
+Cyrillic text. Keep attributed verbatim source excerpts unchanged.
