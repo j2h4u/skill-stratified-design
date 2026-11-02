@@ -44,6 +44,12 @@ read [the full skill](FULL-SKILL.md). Follow its references only as needed.
 
 ### Data representation
 
+## Architecture checks
+
+### Python: Tach
+
+### Other languages
+
 ## Test strategy
 
 ### Calculation

@@ -25,11 +25,15 @@ Only the licensed SICP excerpt contains verbatim source text.
 Other author material remains available through links.
 The design and test guides contain our own guidance.
 
-## Optional tool
+## Optional tools
+
+[Tach](https://docs.gauge.sh/) checks dependencies and public interfaces in
+Python. Use it to enforce the module boundaries selected during design.
+See [architecture-checks.md](architecture-checks.md) for its use and limits,
+and for the selection of tools for other languages.
 
 [dundalek/stratify](https://github.com/dundalek/stratify) provides Python dependency
-maps, call maps, and graph metrics. Its README identifies architecture checks
-as work in progress. No local test results are available.
+maps, call maps, and graph metrics.
 
 A graph can show dependencies. It cannot establish that semantic layers are
 useful. Extra wrappers can increase graph depth without a better design.

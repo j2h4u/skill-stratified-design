@@ -16,16 +16,15 @@ no runtime dependencies.
 These commands install the skill for applications that read `~/.agents/skills`.
 
 ```bash
-git clone https://github.com/j2h4u/skill-stratified-design.git ~/repos/j2h4u/skill-stratified-design
 mkdir -p ~/.agents/skills
-ln -s ~/repos/j2h4u/skill-stratified-design ~/.agents/skills/stratified-design
+git clone https://github.com/j2h4u/skill-stratified-design.git ~/.agents/skills/stratified-design
 ```
 
-Before installation, make sure that the clone path and the link path do not exist.
-If a previous installation exists, compare its contents before replacement.
+The destination directory must not exist. If the skill is already installed,
+update its existing checkout.
 
-Edit and update the repository. The symbolic link gives local agents access
-to the same files. The host application controls skill discovery and reload.
+Update this clone to get new skill versions. The host application controls
+skill discovery and reload.
 
 ## Sources and licenses
 
