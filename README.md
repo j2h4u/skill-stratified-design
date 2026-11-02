@@ -4,9 +4,22 @@ This skill describes software as a sequence of semantic layers. It gives a
 mental model, development procedures, test guidance, and common problems.
 Its sources include SICP and Eric Normand's *Grokking Simplicity*.
 
-Start with the outline in [SKILL.md](SKILL.md). If you need more information,
-read [the full skill](FULL-SKILL.md). It links to detailed task guidance and
-author material in the references.
+## Why an outline and a full skill?
+
+This repository is an experiment in progressive disclosure for agent skills.
+A semantic anchor is a short name for a set of concepts. The hypothesis is
+that capable models can apply familiar concepts from these names without
+loading a full explanation.
+
+[SKILL.md](SKILL.md) is the main entrypoint. It contains an outline of the
+concepts and procedures. Start there. If a concept is unclear or the task
+needs more guidance, read [the full skill](FULL-SKILL.md). Its links lead to
+detailed references and author material. Load that detail only as needed.
+
+Small coding and refactoring trials with Astra, Sol, and Terra found no clear
+advantage for the full text. This supports the outline-first format for the
+tested tasks. Other models and tasks can still need the full guidance.
+
 The [verbatim SICP excerpt](references/sicp-verbatim.md) permits comparison with
 the source text. Normal tasks do not require this comparison. The skill has
 no runtime dependencies.
