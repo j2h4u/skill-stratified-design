@@ -1,5 +1,6 @@
 ---
 name: stratified-design
+license: LICENSE
 description: Use Stratified Design (SICP; Eric Normand, Grokking Simplicity) to design new code or refactor existing code into semantic layers.
 ---
 
